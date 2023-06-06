@@ -1,6 +1,8 @@
 package drivers;
 
 import com.codeborne.selenide.WebDriverProvider;
+import config.RemoteConfig;
+import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
@@ -10,13 +12,15 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class BrowserstackMobileDriver implements WebDriverProvider {
+    static RemoteConfig config = ConfigFactory.create(RemoteConfig.class);
+
     public static URL getAppiumServerUrl() {
-    try {
-        return new URL("http://hub.browserstack.com/wd/hub");
-    } catch (MalformedURLException e) {
-        throw new RuntimeException(e);
+        try {
+            return new URL(config.getRemoteUrl());
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        }
     }
-}
 
     @Override
     public WebDriver createDriver(Capabilities capabilities) {
@@ -24,15 +28,15 @@ public class BrowserstackMobileDriver implements WebDriverProvider {
         mutableCapabilities.merge(capabilities);
 
         // Set your access credentials
-        mutableCapabilities.setCapability("browserstack.user", "siriusblack_O7laPX");
-        mutableCapabilities.setCapability("browserstack.key", "w5R4AzqsB5a2Z6MMT63X");
+        mutableCapabilities.setCapability("browserstack.user", config.getUserName());
+        mutableCapabilities.setCapability("browserstack.key", config.getPassword());
 
         // Set URL of the application under test
-        mutableCapabilities.setCapability("app", "bs://e2340756353e44b0ca3254ce4cf6b7c5d223fc0f");
+        mutableCapabilities.setCapability("app", config.getApp());
 
         // Specify device and os_version for testing
-        mutableCapabilities.setCapability("device", "Google Pixel 5");
-        mutableCapabilities.setCapability("os_version", "11.0");
+        mutableCapabilities.setCapability("device", config.getDeviceName());
+        mutableCapabilities.setCapability("os_version", config.getOsVersion());
 
         // Set other BrowserStack mutableCapabilities
         mutableCapabilities.setCapability("project", "First Java Project");

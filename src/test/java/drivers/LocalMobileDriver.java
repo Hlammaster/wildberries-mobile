@@ -1,8 +1,10 @@
 package drivers;
 
 import com.codeborne.selenide.WebDriverProvider;
+import config.LocalConfig;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
+import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 
@@ -14,9 +16,10 @@ import static io.appium.java_client.remote.AutomationName.ANDROID_UIAUTOMATOR2;
 import static io.appium.java_client.remote.MobilePlatform.ANDROID;
 
 public class LocalMobileDriver implements WebDriverProvider {
+    static LocalConfig config = ConfigFactory.create(LocalConfig.class);
     public static URL getAppiumServerUrl() {
         try {
-            return new URL("http://localhost:4723/wd/hub");
+            return new URL(config.getLocalUrl());
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
@@ -29,11 +32,11 @@ public class LocalMobileDriver implements WebDriverProvider {
 
         options.setAutomationName(ANDROID_UIAUTOMATOR2)
                 .setPlatformName(ANDROID)
-                .setDeviceName("Pixel 4 API 30")
-                .setPlatformVersion("11.0")
+                .setDeviceName(config.getDeviceName())
+                .setPlatformVersion(config.getOsVersion())
                 .setApp(getApk().getAbsolutePath())
-                .setAppPackage("com.wildberries.ru")
-                .setAppActivity("ru.wildberries.SplashActivity");
+                .setAppPackage(config.getAppPackage())
+                .setAppActivity(config.getAppActivity());
 
         return new AndroidDriver(getAppiumServerUrl(), options);
     }
