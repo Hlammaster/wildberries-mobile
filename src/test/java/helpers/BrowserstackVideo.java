@@ -13,7 +13,7 @@ public class BrowserstackVideo {
 
         return given()
                 .log().all()
-                .auth().basic("johnnyfiro_v2Un4A", "MePKpRXM2KiMMu8qiWTb")
+                .auth().basic("siriusblack_O7laPX", "w5R4AzqsB5a2Z6MMT63X")
                 .when()
                 .get(url)
                 .then()
