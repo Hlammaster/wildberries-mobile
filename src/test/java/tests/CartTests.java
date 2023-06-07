@@ -2,6 +2,7 @@ package tests;
 
 import io.appium.java_client.AppiumBy;
 import io.qameta.allure.*;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.text;
@@ -14,6 +15,7 @@ import static io.qameta.allure.Allure.step;
 @Feature("Cart Tests")
 @Severity(SeverityLevel.MINOR)
 public class CartTests extends TestBase {
+    @DisplayName("Проверка появления сообщения о возрастном ограничении")
     @Test
     void ageLimitTest() {
         step("Перейти на вкладку 'Корзина'", () ->
