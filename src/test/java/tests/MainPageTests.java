@@ -36,14 +36,14 @@ public class MainPageTests extends TestBase {
 
     }
 
-    @DisplayName("Проверка смена языка")
+    @DisplayName("Проверка смена валюты")
     @Test
-    void languageTest() {
-        step("Нажать кнопку 'сменить язык'", () ->
+    void currencyChangeTest() {
+        step("Нажать кнопку 'сменить стоимость товаров'", () ->
                 $(AppiumBy.id("com.wildberries.ru:id/savedCurrencyNameView")).click());
         step("Выбрать казахский тенге", () ->
                 $(accessibilityId("Казахский тенге")).click());
-        step("Проверить корректность отображения языка", () ->
+        step("Проверить корректность отображения валюты", () ->
                 $(AppiumBy.id("com.wildberries.ru:id/savedCurrencyNameView"))
                         .shouldHave(text("\uD83C\uDDF0\uD83C\uDDFF тг.")));
 
