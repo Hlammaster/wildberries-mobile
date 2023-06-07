@@ -1,6 +1,7 @@
 package config;
 
 import org.aeonbits.owner.Config;
+
 @Config.Sources({"classpath:properties/remote.properties"})
 public interface RemoteConfig extends Config {
 
@@ -21,7 +22,6 @@ public interface RemoteConfig extends Config {
 
     @Key("os_version")
     String getOsVersion();
-
 
 
 }
