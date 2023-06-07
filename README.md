@@ -113,5 +113,5 @@ gradle clean test "-DdeviceHost=browserstack"
 ## <img src="media/logo/Browserstack.svg" width="25" height="25"/></a> Пример видео прогона автотеста
 
 <p align="center">
-  <img title="Browserstack Video" src="media/video.gif">
+  <img title="Browserstack Video" src="media/screenshots/video.gif">
 </p>
